@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Project ORC</title>
+    <link rel="stylesheet" href="header.css" th:href="@{styles/header.css}"/>
+    <link rel="stylesheet" href="burger.css" th:href="@{styles/burger.css}"/>
+    <script src="burger.js" type="text/javascript" th:src="@{scripts/burger.js}" defer></script>
+
+</head>
+<body>
+
+<div class="header">
+    <div class="log-in-out">
+        <ul class="log-in-out-list">
+            <li class="log-in-out-item"><input class="log-in-out-button" type="button" value="Register"></li>
+            <li class="log-in-out-item"><input class="log-in-out-button" type="button" value="Login"></li>
+            <li class="log-in-out-item"><input class="log-in-out-button" type="button" value="Logout"></li>
+        </ul>
+    </div>
+    <p class="page-title">PROJECT ORC</p>
+</div>
+
+<button class="hamburger">
+    <span class="hamburger-box">
+        <span class="hamburger-inner"></span>
+    </span>
+</button>
+<div class="navigation">
+    <ul class="navigation-list">
+        <li class="navigation-item">
+            <input class="menu-button" type="button" value="Home">
+        </li>
+        <li class="navigation-item">
+            <input class="menu-button" type="button" value="Ekran">
+        </li>
+        <li class="navigation-item">
+            <input class="menu-button" type="button" value="Scenariusze">
+        </li>
+        <li class="navigation-item">
+            <input class="menu-button" type="button" value="Postacie i potwory">
+        </li>
+        <li class="navigation-item">
+            <input class="menu-button" type="button" value="Mapy">
+        </li>
+    </ul>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Project ORC - Register</title>
+    <link rel="stylesheet" href="newUser.css" th:href="@{css/newUser.css}"/>
+</head>
+<body>
+
+<h1>Add a new user</h1>
+
+<form method="POST" th:object="${addUserModel}">
+    <!--			dodawanie obiektu/beana-->
+    <div class="newUserBox">
+
+        <div class="fieldSection">
+            <div class="fieldTitle">Login name & Password</div>
+
+            <input type="text" name="username" id="username" placeholder="username" required th:field="*{username}" />
+            <!--					dodwanie atrybutu do beana-->
+            <div th:errors="*{username}" style="color: red">Error message</div>
+            <input type="password" name="pass1" id="pass1" placeholder="password" required th:field="*{password}">
+            <input type="password" name="pass2" id="pass2" placeholder="repeat password" required th:field="*{repeatPassword}">
+            <div th:errors="*{repeatPassword}" style="color: red">Error message</div>
+        </div>
+
+        <div class="fieldSection">
+            <div class="fieldTitle">Email</div>
+            <input type="email" id="email" name="email" placeholder="Email" required th:field="*{email}"/>
+        </div>
+
+
+        <div class="fieldSection">
+            <div class="fieldTitle">Name</div>
+            <input type="text" name="firstname" id="firstname" placeholder="First name" required th:field="*{firstName}">
+            <input type="text" name="secondname" id="secondname" placeholder="Second name" required th:field="*{secondName}">
+        </div>
+
+        <div class="fieldSection">
+            <div class="fieldTitle">Address</div>
+
+            <input type="text" name="address1" id="address1" placeholder="Street" required th:field="*{street}">
+            <br>
+            <input type="text" name="address2" id="address2" placeholder="City" required th:field="*{city}">
+            <br>
+            <input type="text" name="address3" id="address3" placeholder="State/Region" required th:field="*{region}">
+            <br>
+            <input type="text" name="zip" id="zip" placeholder="Zip or Postal Code" required th:field="*{zip}">
+            <br>
+            <select id="country" name="country" required th:field="*{country}">
+                <option value="none" selected disabled>Country</option>
+                <!--						mimo że disabled to wartość jakaś musi być podana-->
+                <option th:each="country : ${addUserModel.countries}" th:text="${country.value}" th:value="${country.key}" value="XXX">Country name</option>
+                <!--													tutaj nie może być bez addUserModel, bo korzystamy z metody, nie robimy bindingu-->
+
+            </select>
+        </div>
+
+        <input type="submit" value="Save new user" class="button">
+    </div>
+</form>
+
+</body>
+</html>

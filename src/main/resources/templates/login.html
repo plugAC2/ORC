@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Project ORC - Login</title>
+    <link rel="stylesheet" href="newUser.css" th:href="@{css/newUser.css}"/>
+</head>
+<body>
+
+<h1>Login</h1>
+
+<form method="POST" th:object="${loginModel}">
+    <!--			dodawanie obiektu/beana-->
+    <div class="newUserBox">
+        <div class="login-section">
+            <input type="" value="Email"
+        </div>
+        <input type="submit" value="Save new user" class="button">
+    </div>
+</form>
+
+</body>
+</html>
