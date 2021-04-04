@@ -12,10 +12,14 @@
 <form method="POST" th:object="${loginModel}">
     <!--			dodawanie obiektu/beana-->
     <div class="newUserBox">
-        <div class="login-section">
-            <input type="" value="Email"
+        <div class="fieldTitle">Login to ORC</div>
+        <div class="loginSection">
+            <input id="username" type="text" placeholder="Username" name="username" required th:field="*{username}">
+            <div th:errors="*{username}" style="color: red">Error message</div>
+            <input id="password" type="password" placeholder="Password" name="password" required th:field="*{password}">
+            <div th:errors="*{password}" style="color: red">Error message</div>
         </div>
-        <input type="submit" value="Save new user" class="button">
+        <input type="submit" value="Login" class="button">
     </div>
 </form>
 
