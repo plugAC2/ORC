@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 
 @Configuration
@@ -25,10 +26,23 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests(authorize -> authorize
                         .antMatchers("/h2-console/**").permitAll() //do not use in  production
-                        .antMatchers("/", "/home", "/scripts/**", "/styles/**" ).permitAll()
+                        .antMatchers("/", "/home", "/scripts/**", "/styles/**", "/css/**").permitAll()
                 )
                 .authorizeRequests(requests -> ((ExpressionUrlAuthorizationConfigurer.AuthorizedUrl) requests.anyRequest()).authenticated());
-        http.formLogin();
+        http.formLogin()
+                .loginPage("/login")
+                .usernameParameter("username")
+                .passwordParameter("password")
+                .loginProcessingUrl("/login")
+                .permitAll()
+                .successForwardUrl("/")
+                .defaultSuccessUrl("/")
+                .failureUrl("/login?error");
+
+        http.logout()
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "GET"))
+                .logoutSuccessUrl("/")
+                .permitAll();
         http.httpBasic();
 
         //h2 console -- config do not use in  production

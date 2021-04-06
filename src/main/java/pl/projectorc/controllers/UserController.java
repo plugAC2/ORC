@@ -12,15 +12,12 @@ import pl.projectorc.models.UserModel;
 import pl.projectorc.models.LoginModel;
 import pl.projectorc.services.UserService;
 import pl.projectorc.validators.AddUserModelValidator;
-import pl.projectorc.validators.LoginUsernameValidator;
-import pl.projectorc.validators.PasswordValidator;
 import pl.projectorc.validators.UsernameValidator;
 
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping("/user")
+@RequestMapping()
 
 public class UserController {
 
@@ -42,7 +39,7 @@ public class UserController {
         if (bindingResult.hasErrors()) {
             return "register";
         }
-        User user = getUserFromModel(userModel);
+        User user = setUserFromModel(userModel);
         System.out.println(user.toString());
         userService.newRecord(user);
 
@@ -50,25 +47,23 @@ public class UserController {
     }
 
     @GetMapping("/login")
-    public ModelAndView getLogin() {
-        return new ModelAndView("login", "loginModel", new LoginModel());
-    }
-
-
-    @PostMapping("/login")
-    public String loginTo(@Valid LoginModel loginModel, BindingResult bindingResult, HttpSession session){
-        new LoginUsernameValidator(userService).validate(loginModel, bindingResult);
-        new PasswordValidator(userService).validate(loginModel, bindingResult);
-        if (bindingResult.hasErrors()){
-            return "login";
-        }
-
+    public String getLogin() {
         return "login";
-
     }
 
+//
+//    @PostMapping("/login")
+//    public String loginTo(@Valid LoginModel loginModel, BindingResult bindingResult, HttpSession session){
+//        new LoginUsernameValidator(userService).validate(loginModel, bindingResult);
+//        new PasswordValidator(userService).validate(loginModel, bindingResult);
+//        if (bindingResult.hasErrors()){
+//            return "login";
+//        }
+//        return "login";
+//    }
 
-private User getUserFromModel(UserModel userModel) {
+
+private User setUserFromModel(UserModel userModel) {
     String address = userModel.getStreet() + ", " + userModel.getCity() + ", " + userModel.getRegion() + ", " + userModel.getRegion() + ", " + userModel.getCountry();
     return
             new User(userModel.getUsername(),

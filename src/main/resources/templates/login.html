@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html
+        xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Project ORC - Login</title>
@@ -9,16 +10,15 @@
 
 <h1>Login</h1>
 
-<form method="POST" th:object="${loginModel}">
+<form method="POST" th:action="@{/login}" >
     <!--			dodawanie obiektu/beana-->
     <div class="newUserBox">
         <div class="fieldTitle">Login to ORC</div>
         <div class="loginSection">
-            <input id="username" type="text" placeholder="Username" name="username" required th:field="*{username}">
-            <div th:errors="*{username}" style="color: red">Error message</div>
-            <input id="password" type="password" placeholder="Password" name="password" required th:field="*{password}">
-            <div th:errors="*{password}" style="color: red">Error message</div>
+            <input id="username" type="text" placeholder="Username" name="username" autofocus="autofocus" autocomplete="false" required>
+            <input id="password" type="password" placeholder="Password" name="password" required>
         </div>
+        <div th:if="${param.error}" class="error">Invalid Username or Password</div>
         <input type="submit" value="Login" class="button">
     </div>
 </form>
