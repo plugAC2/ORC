@@ -1,10 +1,15 @@
 package pl.projectorc.models;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.validation.constraints.Email;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class AddUserModel {
+@Getter
+@Setter
+public class UserModel {
     private String username;
     private String password;
     private String repeatPassword;
@@ -270,20 +275,20 @@ public class AddUserModel {
         return countries;
     }
 
-    public AddUserModel() {
+    public UserModel() {
     }
 
-    public AddUserModel(String username,
-                        String password,
-                        String repeatPassword,
-                        String email,
-                        String firstName,
-                        String secondName,
-                        String street,
-                        String city,
-                        String region,
-                        String zip,
-                        String country) {
+    public UserModel(String username,
+                     String password,
+                     String repeatPassword,
+                     String email,
+                     String firstName,
+                     String secondName,
+                     String street,
+                     String city,
+                     String region,
+                     String zip,
+                     String country) {
         this.username = username;
         this.password = password;
         this.repeatPassword = repeatPassword;
@@ -294,94 +299,6 @@ public class AddUserModel {
         this.city = city;
         this.region = region;
         this.zip = zip;
-        this.country = country;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getRepeatPassword() {
-        return repeatPassword;
-    }
-
-    public void setRepeatPassword(String repeatPassword) {
-        this.repeatPassword = repeatPassword;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getSecondName() {
-        return secondName;
-    }
-
-    public void setSecondName(String secondName) {
-        this.secondName = secondName;
-    }
-
-    public String getStreet() {
-        return street;
-    }
-
-    public void setStreet(String street) {
-        this.street = street;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getRegion() {
-        return region;
-    }
-
-    public void setRegion(String region) {
-        this.region = region;
-    }
-
-    public String getZip() {
-        return zip;
-    }
-
-    public void setZip(String zip) {
-        this.zip = zip;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
         this.country = country;
     }
 }

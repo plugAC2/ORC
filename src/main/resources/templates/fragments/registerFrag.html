@@ -8,7 +8,7 @@
 
 <h1>Add a new user</h1>
 
-<form method="POST" action="/saveUser" th:object="${addUserModel}">
+<form method="POST" action="/saveUser" th:object="${userModel}">
     <!--			dodawanie obiektu/beana-->
     <div class="newUserBox">
 
@@ -53,8 +53,8 @@
             <select id="country" name="country" required th:field="*{country}">
                 <option value="none" selected disabled>Country</option>
                 <!--						mimo że disabled to wartość jakaś musi być podana-->
-                <option th:each="country : ${addUserModel.countries}" th:text="${country.value}" th:value="${country.key}" value="XXX">Country name</option>
-                <!--													tutaj nie może być bez addUserModel, bo korzystamy z metody, nie robimy bindingu-->
+                <option th:each="country : ${userModel.countries}" th:text="${country.value}" th:value="${country.key}" value="XXX">Country name</option>
+                <!--													tutaj nie może być bez userModel, bo korzystamy z metody, nie robimy bindingu-->
 
             </select>
         </div>

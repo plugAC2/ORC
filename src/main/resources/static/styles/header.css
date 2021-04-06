@@ -1,11 +1,12 @@
 * {
+    position: inherit;
     margin: 0;
     padding: 0;
     border: 0;
 }
 
 .header {
-    height: 15vh;
+    height: 10vh;
     width: 100vw;
     background: linear-gradient(grey, gainsboro);
 }
@@ -16,8 +17,7 @@
     font-size: xx-large;
     font-family: "Helvetica", sans-serif;
     color: darkred;
-    text-align: center;
-    transform: translateY(50%) translateX(130px);
+    transform: translateY(75%) translateX(10px);
 }
 
 .log-in-out {

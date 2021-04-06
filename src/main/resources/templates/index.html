@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -9,14 +9,17 @@
     <script src="burger.js" type="text/javascript" th:src="@{scripts/burger.js}" defer></script>
 
 </head>
-<body>
+<body style="width: 100vw">
 
 <div class="header">
     <div class="log-in-out">
         <ul class="log-in-out-list">
-            <li class="log-in-out-item"><input class="log-in-out-button" type="button" value="Register"></li>
-            <li class="log-in-out-item"><input class="log-in-out-button" type="button" value="Login"></li>
-            <li class="log-in-out-item"><input class="log-in-out-button" type="button" value="Logout"></li>
+            <li class="log-in-out-item">
+                <span style="width: 130px; position: relative; color: darkred" sec:authorize="isAuthenticated()"  th:text="'To options: ' + ${#authentication?.principal?.username}">User</span>
+            </li>
+            <li sec:authorize="!isAuthenticated()" class="log-in-out-item"><input class="log-in-out-button" type="button" value="Login" onclick="window.location.href='/login'"></li>
+            <li class="log-in-out-item"><input class="log-in-out-button" type="button" value="Logout" onclick="window.location.href='/logout'"></li>
+            <li class="log-in-out-item"><input class="log-in-out-button" type="button" value="Register" onclick="window.location.href='/add'"></li>
         </ul>
     </div>
     <p class="page-title">PROJECT ORC</p>
