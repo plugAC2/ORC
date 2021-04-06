@@ -12,6 +12,7 @@
 
 <form method="POST" th:action="@{/login}" >
     <!--			dodawanie obiektu/beana-->
+    <div th:if="${param.newUser}" class="alert">New account created - log in to your account.</div>
     <div class="newUserBox">
         <div class="fieldTitle">Login to ORC</div>
         <div class="loginSection">

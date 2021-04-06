@@ -26,7 +26,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests(authorize -> authorize
                         .antMatchers("/h2-console/**").permitAll() //do not use in  production
-                        .antMatchers("/", "/home", "/scripts/**", "/styles/**", "/css/**").permitAll()
+                        .antMatchers("/", "/home", "/scripts/**", "/styles/**", "/css/**", "/add").permitAll()
                 )
                 .authorizeRequests(requests -> ((ExpressionUrlAuthorizationConfigurer.AuthorizedUrl) requests.anyRequest()).authenticated());
         http.formLogin()

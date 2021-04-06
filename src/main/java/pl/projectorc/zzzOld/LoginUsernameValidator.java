@@ -1,4 +1,4 @@
-package pl.projectorc.validators;
+package pl.projectorc.zzzOld;
 
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;

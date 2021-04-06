@@ -4,8 +4,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.projectorc.entities.User;
+import pl.projectorc.models.UserModel;
+import pl.projectorc.repositories.AuthorityRepository;
+import pl.projectorc.repositories.RoleRepository;
 import pl.projectorc.repositories.UserRepository;
 import java.util.*;
 
@@ -16,7 +20,10 @@ public class UserService implements CrudService<User>, UserDetailsService {
 
 
 //    Sec
+    private final AuthorityRepository authorityRepository;
     private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -63,4 +70,16 @@ public class UserService implements CrudService<User>, UserDetailsService {
         return userRepository.getUserPassword(username).equals(password);
     }
 
+    public void setUserFromModel(UserModel userModel) {
+        String address = userModel.getStreet() + ", " + userModel.getCity() + ", " + userModel.getRegion() + ", " + userModel.getRegion() + ", " + userModel.getCountry();
+        userRepository.save(User.builder()
+        .username(userModel.getUsername())
+        .password(passwordEncoder.encode(userModel.getPassword()))
+        .email(userModel.getEmail())
+        .firstName(userModel.getFirstName())
+        .secondName(userModel.getSecondName())
+        .address(address)
+        .role(roleRepository.findByRoleName("USER").orElseThrow())
+        .build());
+    }
 }

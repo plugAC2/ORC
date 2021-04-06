@@ -1,19 +1,18 @@
-package pl.projectorc.validators;
+package pl.projectorc.zzzOld;
 
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 import pl.projectorc.entities.User;
 import pl.projectorc.models.LoginModel;
-import pl.projectorc.repositories.UserRepository;
 import pl.projectorc.services.UserService;
 
 import java.util.Optional;
 
-public class PasswordValidator implements Validator {
+public class PasswordLoginValidator implements Validator {
 
     UserService userService;
 
-    public PasswordValidator(UserService userService) {
+    public PasswordLoginValidator(UserService userService) {
         this.userService = userService;
     }
 
