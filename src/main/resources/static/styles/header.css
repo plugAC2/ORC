@@ -1,0 +1,42 @@
+* {
+    position: inherit;
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+.header {
+    height: 10vh;
+    width: 100vw;
+    background: linear-gradient(grey, gainsboro);
+}
+
+.page-title {
+    display: block;
+    font-weight: bold;
+    font-size: xx-large;
+    font-family: "Helvetica", sans-serif;
+    color: darkred;
+    transform: translateY(75%) translateX(10px);
+}
+
+.log-in-out {
+    float: right;
+    position: relative;
+    margin-right: 10px;
+}
+
+.log-in-out-list {
+
+}
+
+.log-in-out-item {
+    display: inline;
+}
+
+.log-in-out-button {
+    padding: 5px;
+    color: darkred;
+    background-color: transparent;
+    cursor: pointer;
+}
