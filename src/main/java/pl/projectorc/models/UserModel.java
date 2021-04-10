@@ -301,4 +301,5 @@ public class UserModel {
         this.zip = zip;
         this.country = country;
     }
+
 }

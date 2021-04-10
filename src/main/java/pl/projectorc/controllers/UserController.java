@@ -36,7 +36,7 @@ public class UserController {
         if (bindingResult.hasErrors()) {
             return "register";
         }
-        userService.setUserFromModel(userModel);
+        userService.newRecord(userModel);
         return "redirect:/login?newUser"; //dodać napis, że utworzono użytkownika
     }
 

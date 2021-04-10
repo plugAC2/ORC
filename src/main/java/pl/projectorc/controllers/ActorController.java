@@ -39,7 +39,7 @@ public class ActorController {
         if (bindingResult.hasErrors()) {
             return "newActor";
         }
-        actorService.newRecord(actorService.setActorFromModel(actorModel));
+        actorService.newRecord(actorModel);
 
         return "redirect:/character";
     }
@@ -47,15 +47,15 @@ public class ActorController {
     @GetMapping(value = "/edit", params = "id")
     public ModelAndView editCharacter(@RequestParam Long id) {
         try {
-            return new ModelAndView("editActor", "editActorModel", actorService.setModelFromActorId(id));
+            return new ModelAndView("editActor", "editActorModel", actorService.setModelFromEntityId(id));
         } catch (NoSuchElementException e) {
             return new ModelAndView("redirect:/error");
         }
     }
 
     @PostMapping(value = "/edit", params = "id")
-    public String updateCharacter(@ModelAttribute("editActorModel") ActorModel actorModel) {
-        Actor actor = actorService.setActorFromModel(actorModel);
+    public String updateCharacter(@RequestParam Long id, @ModelAttribute("editActorModel") ActorModel actorModel) {
+        actorService.changeRecord(id, actorModel);
         return "redirect:/character";
     }
 

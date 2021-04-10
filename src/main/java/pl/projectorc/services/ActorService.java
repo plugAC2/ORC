@@ -15,7 +15,7 @@ import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
-public class ActorService implements CrudService<Actor>{
+public class ActorService implements CrudService<Actor, ActorModel>{
 
     @NonNull
     private ActorRepository actorRepository;
@@ -26,8 +26,8 @@ public class ActorService implements CrudService<Actor>{
     }
 
     @Override
-    public void newRecord(Actor actor) {
-        actorRepository.save(actor);
+    public void newRecord(ActorModel actorModel) {
+        actorRepository.save(setEntityFromModel(actorModel));
     }
 
     @Override
@@ -36,8 +36,11 @@ public class ActorService implements CrudService<Actor>{
     }
 
     @Override
-    public void changeRecord(Actor actor) {
-        actorRepository.save(actor);
+    public void changeRecord(Long id, ActorModel actorModel) {
+        ActorModel actorModelToChange = setModelFromEntityId(id);
+        System.out.println(actorModel.getName());
+        actorModelToChange.setName(actorModel.getName());
+        newRecord(actorModelToChange);
     }
 
     @Override
@@ -45,17 +48,20 @@ public class ActorService implements CrudService<Actor>{
 
     }
 
-    public Actor setActorFromModel(ActorModel actorModel) {
+    @Override
+    public Actor setEntityFromModel(ActorModel actorModel) {
         return Actor.builder()
                 .name(actorModel.getName())
                 .general(false)
                 .build();
     }
 
-    public ActorModel setModelFromActorId(Long id) throws NoSuchElementException {
+    @Override
+    public ActorModel setModelFromEntityId(Long id) {
         Actor actor = getRecordById(id).orElseThrow(NoSuchElementException::new);
         return ActorModel.builder()
                 .name(actor.getName())
                 .build();
     }
+
 }
