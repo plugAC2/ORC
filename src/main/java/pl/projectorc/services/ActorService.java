@@ -50,6 +50,7 @@ public class ActorService implements CrudService<Actor, ActorModel> {
         actorModelToChange.setName(actorModel.getName());
         Actor actorToUpdate = setEntityFromModel(actorModelToChange);
         actorToUpdate.setId(id);
+        System.out.println(actorToUpdate.getName());
         newRecordDirect(actorToUpdate);
     }
 
