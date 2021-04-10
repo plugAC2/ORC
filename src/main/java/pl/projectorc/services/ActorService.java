@@ -31,6 +31,11 @@ public class ActorService implements CrudService<Actor, ActorModel>{
     }
 
     @Override
+    public void newRecordDirect(Actor actor) {
+        actorRepository.save(actor);
+    }
+
+    @Override
     public Optional<Actor> getRecordById(Long id) {
         return actorRepository.findById(id);
     }
@@ -38,14 +43,15 @@ public class ActorService implements CrudService<Actor, ActorModel>{
     @Override
     public void changeRecord(Long id, ActorModel actorModel) {
         ActorModel actorModelToChange = setModelFromEntityId(id);
-        System.out.println(actorModel.getName());
         actorModelToChange.setName(actorModel.getName());
-        newRecord(actorModelToChange);
+        Actor actorToUpdate = setEntityFromModel(actorModelToChange);
+        actorToUpdate.setId(id);
+        newRecordDirect(actorToUpdate);
     }
 
     @Override
     public void deleteRecordById(Long id) {
-
+        actorRepository.deleteById(id);
     }
 
     @Override

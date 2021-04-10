@@ -59,4 +59,10 @@ public class ActorController {
         return "redirect:/character";
     }
 
+    @GetMapping(value = "/delete", params = "id")
+    public String deleteCharacter(@RequestParam Long id) {
+        actorService.deleteRecordById(id);
+        return "redirect:/character";
+    }
+
 }

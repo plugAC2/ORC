@@ -5,19 +5,21 @@
     <title>Title</title>
 </head>
 <body>
-
+<div>
+    <a href="/">Home</a>
+    <a href="/character/add">Add a new character</a>
+</div>
 <ul>
   <li th:each="actor : ${actors}">
       <span th:text="${actor.name}">Character</span>
       <div>
           <a th:href="@{/character/edit(id=${actor.id})}" th:text="Edit" href="/character/edit/0">EDIT</a>
+          <a th:href="@{/character/delete(id=${actor.id})}" th:text="Delete" href="/character/edit/0">EDIT</a>
       </div>
   </li>
 
 </ul>
-<div>
-    <a th:href="@{/character/add}" th:text="Add a new character" href="/character/add">ADD</a>
-</div>
+
 
 </body>
 </html>

@@ -41,6 +41,11 @@ public class UserService implements CrudService<User, UserModel>, UserDetailsSer
     }
 
     @Override
+    public void newRecordDirect(User user) {
+        userRepository.save(user);
+    }
+
+    @Override
     public Optional<User> getRecordById(Long id) {
         return userRepository.findById(id);
     }
