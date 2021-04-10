@@ -1,13 +1,15 @@
 package pl.projectorc.entities;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Set;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity
 public class Scenario {
     @Id
@@ -16,13 +18,10 @@ public class Scenario {
     private String name;
     private String description;
     private String content;
-    @OneToMany
-    @JoinColumn(name = "actor_id")
+    @ManyToMany
     private Set<Actor> actors;
-    @OneToMany
-    @JoinColumn(name = "monster_id")
+    @ManyToMany
     private Set<Monster> monsters;
-    @OneToMany
-    @JoinColumn(name = "map_id")
+    @ManyToMany
     private Set<Map> maps;
 }

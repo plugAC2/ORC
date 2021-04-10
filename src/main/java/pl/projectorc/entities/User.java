@@ -5,10 +5,12 @@ import org.springframework.security.core.CredentialsContainer;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.thymeleaf.expression.Maps;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -30,6 +32,18 @@ public class User implements UserDetails, CredentialsContainer {
     private String firstName;
     private String secondName;
     private String address;
+
+    @ManyToMany
+    private List<Actor> actors;
+
+    @ManyToMany
+    private List<Monster> monsters;
+
+    @ManyToMany
+    private List<Map> maps;
+
+    @ManyToMany
+    private List<Scenario> scenarios;
 
     @Singular
     @ManyToMany(cascade = {CascadeType.MERGE}, fetch = FetchType.EAGER)
@@ -94,8 +108,6 @@ public class User implements UserDetails, CredentialsContainer {
     public void eraseCredentials() {
         this.password = null;
     }
-
-
 
 
     // to be deleted

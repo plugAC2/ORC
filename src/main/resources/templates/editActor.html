@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<form method="POST" th:object="${editActorModel}">
+  <div class="add-new-box">
+    <div class="fieldSection">
+      <div class="fieldTitle">Edit the character.</div>
+        <input type="text" name="name" id="name" placeholder="name" required th:field="*{name}" />
+        <input type="submit" value="Save">
+    </div>
+  </div>
+</form>
+
+</body>
+</html>

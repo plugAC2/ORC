@@ -4,9 +4,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+import pl.projectorc.entities.Actor;
 import pl.projectorc.entities.Authority;
 import pl.projectorc.entities.Role;
 import pl.projectorc.entities.User;
+import pl.projectorc.repositories.ActorRepository;
 import pl.projectorc.repositories.AuthorityRepository;
 import pl.projectorc.repositories.RoleRepository;
 import pl.projectorc.repositories.UserRepository;
@@ -23,11 +25,15 @@ public class UserDataLoader implements CommandLineRunner {
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
 
+    //for data
+    private final ActorRepository actorRepository;
+
 
     @Override
     public void run(String... args) throws Exception {
         if(authorityRepository.count() == 0) {
             loadSecurityData();
+            loadData();
         }
     }
 
@@ -71,6 +77,21 @@ public class UserDataLoader implements CommandLineRunner {
                 .secondName("User")
                 .address("Computer")
                 .role(userRole)
+                .build());
+    }
+
+    private void loadData() {
+        actorRepository.save(Actor.builder()
+            .name("Diego")
+            .general(true)
+            .build());
+        actorRepository.save(Actor.builder()
+                .name("Ingwar")
+                .general(true)
+                .build());
+        actorRepository.save(Actor.builder()
+                .name("Xzar")
+                .general(true)
                 .build());
     }
 }

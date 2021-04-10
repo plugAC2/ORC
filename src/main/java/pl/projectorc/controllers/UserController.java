@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.servlet.ModelAndView;
-import pl.projectorc.entities.User;
 import pl.projectorc.models.UserModel;
 import pl.projectorc.services.UserService;
 import pl.projectorc.validators.PasswordRegisterValidator;
@@ -17,7 +16,6 @@ import javax.validation.Valid;
 
 @Controller
 @RequestMapping()
-
 public class UserController {
 
     private final UserService userService;

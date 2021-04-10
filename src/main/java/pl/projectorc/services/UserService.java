@@ -18,7 +18,6 @@ import java.util.*;
 @Service
 public class UserService implements CrudService<User>, UserDetailsService {
 
-
 //    Sec
     private final AuthorityRepository authorityRepository;
     private final UserRepository userRepository;
@@ -43,7 +42,7 @@ public class UserService implements CrudService<User>, UserDetailsService {
     }
 
     @Override
-    public Optional<User> showRecordById(Long id) {
+    public Optional<User> getRecordById(Long id) {
         return userRepository.findById(id);
     }
 
@@ -72,7 +71,7 @@ public class UserService implements CrudService<User>, UserDetailsService {
 
     public void setUserFromModel(UserModel userModel) {
         String address = userModel.getStreet() + ", " + userModel.getCity() + ", " + userModel.getRegion() + ", " + userModel.getRegion() + ", " + userModel.getCountry();
-        userRepository.save(User.builder()
+        newRecord(User.builder()
         .username(userModel.getUsername())
         .password(passwordEncoder.encode(userModel.getPassword()))
         .email(userModel.getEmail())

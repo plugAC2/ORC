@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<ul>
+  <li th:each="actor : ${actors}">
+      <span th:text="${actor.name}">Character</span>
+      <div>
+          <a th:href="@{/character/edit(id=${actor.id})}" th:text="Edit" href="/character/edit/0">EDIT</a>
+      </div>
+  </li>
+
+</ul>
+
+</body>
+</html>

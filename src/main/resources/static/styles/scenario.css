@@ -1,0 +1,13 @@
+.main-list {
+    font-size: 2em;
+    list-style: none;
+    display: flex;
+}
+.main-list-element {
+    font-size: 12px;
+    position: static;
+    display: flow;
+    padding: 5px;
+    font-weight: normal;
+
+}
