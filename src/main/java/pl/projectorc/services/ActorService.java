@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import pl.projectorc.entities.Actor;
 import pl.projectorc.models.ActorModel;
 import pl.projectorc.repositories.ActorRepository;
+import pl.projectorc.security.UserSecurityUtil;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -15,14 +16,16 @@ import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
-public class ActorService implements CrudService<Actor, ActorModel>{
+public class ActorService implements CrudService<Actor, ActorModel> {
 
     @NonNull
     private ActorRepository actorRepository;
+    @NonNull
+    private UserSecurityUtil userSecurityUtil;
 
     @Override
     public List<Actor> getAll() {
-        return actorRepository.findAll();
+        return actorRepository.getActorByGeneralAndUser(userSecurityUtil.userId());
     }
 
     @Override
@@ -46,12 +49,15 @@ public class ActorService implements CrudService<Actor, ActorModel>{
         actorModelToChange.setName(actorModel.getName());
         Actor actorToUpdate = setEntityFromModel(actorModelToChange);
         actorToUpdate.setId(id);
+        System.out.println(actorToUpdate.getName());
         newRecordDirect(actorToUpdate);
     }
 
     @Override
     public void deleteRecordById(Long id) {
+        actorRepository.deleteUserActorKey(id);
         actorRepository.deleteById(id);
+
     }
 
     @Override
@@ -68,6 +74,11 @@ public class ActorService implements CrudService<Actor, ActorModel>{
         return ActorModel.builder()
                 .name(actor.getName())
                 .build();
+    }
+
+    public boolean checkIfActorGeneral(Long id) {
+        Actor actor = getRecordById(id).orElseThrow(NoSuchElementException::new);
+        return actor.getGeneral();
     }
 
 }
