@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import pl.projectorc.entities.Actor;
 import pl.projectorc.models.ActorModel;
 import pl.projectorc.repositories.ActorRepository;
+import pl.projectorc.security.UserSecurityUtil;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -15,19 +16,22 @@ import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
-public class ActorService implements CrudService<Actor, ActorModel>{
+public class ActorService implements CrudService<Actor, ActorModel> {
 
     @NonNull
     private ActorRepository actorRepository;
+    @NonNull
+    private UserSecurityUtil userSecurityUtil;
 
     @Override
     public List<Actor> getAll() {
-        return actorRepository.findAll();
+        return actorRepository.getActorByGeneralAndUser(userSecurityUtil.userId());
     }
 
     @Override
     public void newRecord(ActorModel actorModel) {
-        actorRepository.save(setEntityFromModel(actorModel));
+        Actor savedActor = actorRepository.save(setEntityFromModel(actorModel));
+        actorRepository.linkUserActor(userSecurityUtil.userId(), savedActor.getId());
     }
 
     @Override
@@ -51,7 +55,9 @@ public class ActorService implements CrudService<Actor, ActorModel>{
 
     @Override
     public void deleteRecordById(Long id) {
+        actorRepository.deleteUserActorKey(id);
         actorRepository.deleteById(id);
+
     }
 
     @Override
@@ -68,6 +74,11 @@ public class ActorService implements CrudService<Actor, ActorModel>{
         return ActorModel.builder()
                 .name(actor.getName())
                 .build();
+    }
+
+    public boolean checkIfActorGeneral(Long id) {
+        Actor actor = getRecordById(id).orElseThrow(NoSuchElementException::new);
+        return actor.getGeneral();
     }
 
 }

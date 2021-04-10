@@ -1,12 +1,12 @@
 package pl.projectorc.controllers;
 
-import org.dom4j.rule.Mode;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import pl.projectorc.entities.Actor;
 import pl.projectorc.models.ActorModel;
+import pl.projectorc.security.UserSecurityUtil;
 import pl.projectorc.services.ActorService;
 
 import javax.validation.Valid;
@@ -18,9 +18,11 @@ import java.util.NoSuchElementException;
 public class ActorController {
 
     private ActorService actorService;
+    private UserSecurityUtil userSecurityUtil;
 
-    public ActorController(ActorService actorService) {
+    public ActorController(ActorService actorService, UserSecurityUtil userSecurityUtil) {
         this.actorService = actorService;
+        this.userSecurityUtil = userSecurityUtil;
     }
 
     @GetMapping
@@ -47,6 +49,9 @@ public class ActorController {
     @GetMapping(value = "/edit", params = "id")
     public ModelAndView editCharacter(@RequestParam Long id) {
         try {
+            if(!actorService.checkIfActorGeneral(id)) {
+                userSecurityUtil.userOwnsCharacter(id);
+            }
             return new ModelAndView("editActor", "editActorModel", actorService.setModelFromEntityId(id));
         } catch (NoSuchElementException e) {
             return new ModelAndView("redirect:/error");
@@ -61,6 +66,9 @@ public class ActorController {
 
     @GetMapping(value = "/delete", params = "id")
     public String deleteCharacter(@RequestParam Long id) {
+        if(!actorService.checkIfActorGeneral(id)) {
+            userSecurityUtil.userOwnsCharacter(id);
+        }
         actorService.deleteRecordById(id);
         return "redirect:/character";
     }

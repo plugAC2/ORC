@@ -33,7 +33,10 @@ public class User implements UserDetails, CredentialsContainer {
     private String secondName;
     private String address;
 
+    @Singular
     @ManyToMany
+    @JoinTable(name = "users_actors", joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "actor_id", referencedColumnName = "id")})
     private List<Actor> actors;
 
     @ManyToMany
@@ -119,29 +122,5 @@ public class User implements UserDetails, CredentialsContainer {
         this.firstName = firstName;
         this.secondName = secondName;
         this.address = address;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", email='" + email + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", secondName='" + secondName + '\'' +
-                ", address='" + address + '\'' +
-                ", actors=" + actors +
-                ", monsters=" + monsters +
-                ", maps=" + maps +
-                ", scenarios=" + scenarios +
-                ", roles=" + roles +
-                ", createdAt=" + createdAt +
-                ", modifiedAt=" + modifiedAt +
-                ", accountNonExpired=" + accountNonExpired +
-                ", accountNonLocked=" + accountNonLocked +
-                ", credentialNonExpired=" + credentialNonExpired +
-                ", enabled=" + enabled +
-                '}';
     }
 }

@@ -1,5 +1,6 @@
 package pl.projectorc.bootstrap;
 
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -15,6 +16,7 @@ import pl.projectorc.repositories.UserRepository;
 
 import java.util.Arrays;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Component
@@ -44,10 +46,10 @@ public class UserDataLoader implements CommandLineRunner {
         Authority readScenario = authorityRepository.save(Authority.builder().permission("scenario.read").build());
         Authority deleteScenario = authorityRepository.save(Authority.builder().permission("scenario.delete").build());
         // CRUD character
-        Authority createCharacter = authorityRepository.save(Authority.builder().permission("character.create").build());
-        Authority updateCharacter = authorityRepository.save(Authority.builder().permission("character.update").build());
-        Authority readCharacter = authorityRepository.save(Authority.builder().permission("character.read").build());
-        Authority deleteCharacter = authorityRepository.save(Authority.builder().permission("character.delete").build());
+        Authority createActor = authorityRepository.save(Authority.builder().permission("actor.create").build());
+        Authority updateActor = authorityRepository.save(Authority.builder().permission("actor.update").build());
+        Authority readActor = authorityRepository.save(Authority.builder().permission("actor.read").build());
+        Authority deleteActor = authorityRepository.save(Authority.builder().permission("actor.delete").build());
         //CRUD monster, map, to add
 
 
