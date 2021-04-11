@@ -84,9 +84,9 @@ public class UserDataLoader implements CommandLineRunner {
 
     private void loadData() {
         actorRepository.save(Actor.builder()
-            .name("Diego")
-            .general(true)
-            .build());
+                .name("Diego")
+                .general(true)
+                .build());
         actorRepository.save(Actor.builder()
                 .name("Ingwar")
                 .general(true)

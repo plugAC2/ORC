@@ -5,7 +5,6 @@ import org.springframework.security.core.CredentialsContainer;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.thymeleaf.expression.Maps;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -112,15 +111,4 @@ public class User implements UserDetails, CredentialsContainer {
         this.password = null;
     }
 
-
-    // to be deleted
-
-    public User(String username, String password, @Email String email, String firstName, String secondName, String address) {
-        this.username = username;
-        this.password = password;
-        this.email = email;
-        this.firstName = firstName;
-        this.secondName = secondName;
-        this.address = address;
-    }
 }
