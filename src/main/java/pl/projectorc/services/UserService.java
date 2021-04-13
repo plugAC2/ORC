@@ -36,6 +36,11 @@ public class UserService implements CrudService<User, UserModel>, UserDetailsSer
     }
 
     @Override
+    public List<UserModel> getAllModel() {
+        return null;
+    }
+
+    @Override
     public void newRecord(UserModel userModel) {
         userRepository.save(setEntityFromModel(userModel));
     }
@@ -72,6 +77,11 @@ public class UserService implements CrudService<User, UserModel>, UserDetailsSer
                 .address(address)
                 .role(roleRepository.findByRoleName("USER").orElseThrow())
                 .build();
+    }
+
+    @Override
+    public UserModel setModelFromEntity(User user) {
+        return null;
     }
 
     @Override

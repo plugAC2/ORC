@@ -30,7 +30,6 @@ public class UserDataLoader implements CommandLineRunner {
     //for data
     private final ActorRepository actorRepository;
 
-
     @Override
     public void run(String... args) throws Exception {
         if(authorityRepository.count() == 0) {

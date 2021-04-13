@@ -11,6 +11,7 @@ import javax.validation.constraints.NotEmpty;
 @Builder
 public class ActorModel {
 
+    private Long id = 0L;
     @NotEmpty
     private String name;
 }

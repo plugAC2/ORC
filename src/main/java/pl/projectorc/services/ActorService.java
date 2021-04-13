@@ -12,6 +12,7 @@ import pl.projectorc.security.UserSecurityUtil;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 
 @RequiredArgsConstructor
@@ -26,6 +27,14 @@ public class ActorService implements CrudService<Actor, ActorModel> {
     @Override
     public List<Actor> getAll() {
         return actorRepository.getActorByGeneralAndUser(userSecurityUtil.userId());
+    }
+
+    @Override
+    public List<ActorModel> getAllModel() {
+        List<Actor> actors = actorRepository.getActorByGeneralAndUser(userSecurityUtil.userId());
+        return actors.stream()
+                .map(this::setModelFromEntity)
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -73,6 +82,13 @@ public class ActorService implements CrudService<Actor, ActorModel> {
     public ActorModel setModelFromEntityId(Long id) {
         Actor actor = getRecordById(id).orElseThrow(NoSuchElementException::new);
         return ActorModel.builder()
+                .name(actor.getName())
+                .build();
+    }
+
+    public ActorModel setModelFromEntity(Actor actor) {
+        return ActorModel.builder()
+                .id(actor.getId())
                 .name(actor.getName())
                 .build();
     }

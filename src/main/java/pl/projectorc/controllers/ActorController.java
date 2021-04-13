@@ -4,7 +4,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import pl.projectorc.entities.Actor;
 import pl.projectorc.models.ActorModel;
 import pl.projectorc.security.UserSecurityUtil;
 import pl.projectorc.services.ActorService;
@@ -27,7 +26,7 @@ public class ActorController {
 
     @GetMapping
     public ModelAndView getAllCharacters() {
-        List<Actor> actors = actorService.getAll();
+        List<ActorModel> actors = actorService.getAllModel();
         return new ModelAndView("actor", "actors", actors);
     }
 

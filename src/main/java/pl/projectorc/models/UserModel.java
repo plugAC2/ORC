@@ -1,5 +1,6 @@
 package pl.projectorc.models;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,6 +10,7 @@ import java.util.TreeMap;
 
 @Getter
 @Setter
+@Builder
 public class UserModel {
     private String username;
     private String password;
