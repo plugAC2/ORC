@@ -1,0 +1,39 @@
+a:link, a:visited {
+    color: darkred;
+    padding: 10px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+
+a:hover, a:active {
+    background-color: gray;
+}
+
+.model {
+    font-size: large;
+    position: absolute;
+    top: 10vh;
+    left: 12em;
+    display: flex;
+    color: darkred;
+}
+
+.model-menu {
+    display: block;
+    flex-flow: row;
+    position: relative;
+}
+
+.model-title {
+    font-weight: bold;
+}
+
+.model-list {
+    display: flex;
+    flex-flow: column;
+    transform: translateX(-16em);
+    top: 4em;
+    position: relative;
+    margin-top: 40px;
+}

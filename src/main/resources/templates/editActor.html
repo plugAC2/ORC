@@ -1,20 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+
+<html xmlns:th="http://www.thymeleaf.org" lang="en" th:include="layouts/layout ::page">
+
 <body>
 
-<form method="POST" th:object="${editActorModel}">
+<div class="model" th:fragment="content">
+<form class="model-menu" method="POST" th:object="${editActorModel}">
   <div class="add-new-box">
     <div class="fieldSection">
-      <div class="fieldTitle">Edit the character.</div>
+      <div class="fieldTitle"><h4>Edit the character.</h4></div>
+        <label>Name: </label>
         <input type="text" name="name" id="name" placeholder="name" required th:field="*{name}" />
         <input type="submit" value="Save">
     </div>
   </div>
 </form>
+</div>
 
 </body>
 </html>

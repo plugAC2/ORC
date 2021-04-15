@@ -1,28 +1,29 @@
-<!DOCTYPE html>
-<html
-        xmlns:th="http://www.thymeleaf.org" lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Project ORC - Login</title>
-    <link rel="stylesheet" href="newUser.css" th:href="@{css/newUser.css}"/>
-</head>
+<html xmlns:th="http://www.thymeleaf.org" lang="en" th:include="layouts/layout :: page">
+
 <body>
+<div class="model" th:fragment="content">
 
-<h1>Login</h1>
 
-<form method="POST" th:action="@{/login}" >
-    <!--			dodawanie obiektu/beana-->
-    <div th:if="${param.newUser}" class="alert">New account created - log in to your account.</div>
-    <div class="newUserBox">
-        <div class="fieldTitle">Login to ORC</div>
-        <div class="loginSection">
-            <input id="username" type="text" placeholder="Username" name="username" autofocus="autofocus" autocomplete="false" required>
-            <input id="password" type="password" placeholder="Password" name="password" required>
+    <form class="model-menu" method="POST" th:action="@{/login}">
+        <!--			dodawanie obiektu/beana-->
+        <div th:if="${param.newUser}" class="alert">New account created - log in to your account.</div>
+        <div style="margin-bottom: 15px"><h1>Login to ORC</h1></div>
+        <div>
+            <div class="loginSection">
+                <label>Username:
+                    <input id="username" type="text" placeholder="Username" name="username" autofocus="autofocus"
+                           autocomplete="false" required>
+                </label>
+                <br>
+                <label>Password:
+                    <input id="password" type="password" placeholder="Password" name="password" required >
+                </label>
+            </div>
+            <div th:if="${param.error}" class="error">Invalid Username or Password</div>
+            <input type="submit" value="Login" class="button">
         </div>
-        <div th:if="${param.error}" class="error">Invalid Username or Password</div>
-        <input type="submit" value="Login" class="button">
-    </div>
-</form>
+    </form>
 
+</div>
 </body>
 </html>
