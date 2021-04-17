@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Scenario</title>
+    <link rel="stylesheet" href="header.css" th:href="@{styles/header.css}"/>
+    <link rel="stylesheet" href="burger.css" th:href="@{styles/burger.css}"/>
+    <link rel="stylesheet" href="content.css" th:href="@{styles/content.css}"/>
+    <link rel="stylesheet" href="scenario.css" th:href="@{styles/scenario.css}"/>
+</head>
+<body>
+
+<div class="grid-container">
+    <div class="submenu">
+        <div class="content-menu">
+            <button class="button-content" type="button" value="characters">Show Characters</button>
+            <button class="button-content" type="button" value="monsters">Show Monsters</button>
+            <button class="button-content" type="button" value="map">Show Map</button>
+            <button class="button-content" type="button" value="content">Show Scenario</button>
+        </div>
+    </div>
+    <div class="submain">
+        <ul class="main-list">
+            <li>
+                <div class="main-list-element">
+                    Postać
+                    <ul class="inner-list"> Charakterystyka:
+                        <li class="inner-list-element">
+                            DANE
+                        </li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+
+</body>
+</html>

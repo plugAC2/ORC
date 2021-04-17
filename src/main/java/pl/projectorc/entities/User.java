@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -30,6 +31,21 @@ public class User implements UserDetails, CredentialsContainer {
     private String firstName;
     private String secondName;
     private String address;
+
+    @Singular
+    @ManyToMany
+    @JoinTable(name = "users_actors", joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "actor_id", referencedColumnName = "id")})
+    private List<Actor> actors;
+
+    @ManyToMany
+    private List<Monster> monsters;
+
+    @ManyToMany
+    private List<Map> maps;
+
+    @ManyToMany
+    private List<Scenario> scenarios;
 
     @Singular
     @ManyToMany(cascade = {CascadeType.MERGE}, fetch = FetchType.EAGER)
@@ -95,17 +111,4 @@ public class User implements UserDetails, CredentialsContainer {
         this.password = null;
     }
 
-
-
-
-    // to be deleted
-
-    public User(String username, String password, @Email String email, String firstName, String secondName, String address) {
-        this.username = username;
-        this.password = password;
-        this.email = email;
-        this.firstName = firstName;
-        this.secondName = secondName;
-        this.address = address;
-    }
 }

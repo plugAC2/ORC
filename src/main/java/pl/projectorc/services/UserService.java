@@ -16,10 +16,8 @@ import java.util.*;
 
 @RequiredArgsConstructor
 @Service
-public class UserService implements CrudService<User>, UserDetailsService {
+public class UserService implements CrudService<User, UserModel>, UserDetailsService {
 
-
-//    Sec
     private final AuthorityRepository authorityRepository;
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
@@ -38,23 +36,57 @@ public class UserService implements CrudService<User>, UserDetailsService {
     }
 
     @Override
-    public void newRecord(User user) {
+    public List<UserModel> getAllModel() {
+        return null;
+    }
+
+    @Override
+    public void newRecord(UserModel userModel) {
+        userRepository.save(setEntityFromModel(userModel));
+    }
+
+    @Override
+    public void newRecordDirect(User user) {
         userRepository.save(user);
     }
 
     @Override
-    public Optional<User> showRecordById(Long id) {
+    public Optional<User> getRecordById(Long id) {
         return userRepository.findById(id);
     }
 
     @Override
-    public void changeRecord(User user) {
+    public void changeRecord(Long id, UserModel userModel) {
 
     }
 
     @Override
     public void deleteRecordById(Long id) {
         userRepository.deleteById(id);
+    }
+
+    @Override
+    public User setEntityFromModel(UserModel userModel) {
+        String address = userModel.getStreet() + ", " + userModel.getCity() + ", " + userModel.getRegion() + ", " + userModel.getRegion() + ", " + userModel.getCountry();
+        return User.builder()
+                .username(userModel.getUsername())
+                .password(passwordEncoder.encode(userModel.getPassword()))
+                .email(userModel.getEmail())
+                .firstName(userModel.getFirstName())
+                .secondName(userModel.getSecondName())
+                .address(address)
+                .role(roleRepository.findByRoleName("USER").orElseThrow())
+                .build();
+    }
+
+    @Override
+    public UserModel setModelFromEntity(User user) {
+        return null;
+    }
+
+    @Override
+    public UserModel setModelFromEntityId(Long id) {
+        return null;
     }
 
     public Optional<User> showRecordByUsername(String username) {
@@ -70,16 +102,4 @@ public class UserService implements CrudService<User>, UserDetailsService {
         return userRepository.getUserPassword(username).equals(password);
     }
 
-    public void setUserFromModel(UserModel userModel) {
-        String address = userModel.getStreet() + ", " + userModel.getCity() + ", " + userModel.getRegion() + ", " + userModel.getRegion() + ", " + userModel.getCountry();
-        userRepository.save(User.builder()
-        .username(userModel.getUsername())
-        .password(passwordEncoder.encode(userModel.getPassword()))
-        .email(userModel.getEmail())
-        .firstName(userModel.getFirstName())
-        .secondName(userModel.getSecondName())
-        .address(address)
-        .role(roleRepository.findByRoleName("USER").orElseThrow())
-        .build());
-    }
 }

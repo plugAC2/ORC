@@ -1,0 +1,26 @@
+<html xmlns:th="http://www.thymeleaf.org" lang="en" th:include="layouts/layout :: page">
+
+<body>
+
+<div class="model" th:fragment="content">
+
+    <div class="model-menu">
+        <span class="model-title">Characters</span>
+        <a href="/"> Home </a>
+        <a href="/character/add"> Add a new character </a>
+    </div>
+
+
+    <ul class="model-list">
+        <li th:each="actor : ${actors}">
+            <span th:text="${actor.name}">Character</span>
+            <div>
+                <a th:href="@{/character/edit(id=${actor.id})}" th:text="Edit" href="/character/edit/0">EDIT</a>
+                <a th:href="@{/character/delete(id=${actor.id})}" th:text="Delete" href="/character/edit/0">EDIT</a>
+            </div>
+        </li>
+    </ul>
+</div>
+
+</body>
+</html>
