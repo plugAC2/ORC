@@ -12,21 +12,4 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class UserServiceTest {
 
-
-//    @Test
-//    void test(){
-//        UserRepository userRepo = mock(UserRepository.class);
-//
-//        UserService service = new UserService(userRepo);
-//        String username = "georg";
-//        User user = new User();
-//        user.setUsername("georg");
-//        when(userRepo.findByUsername(username)).thenReturn(Optional.ofNullable(user));
-//        Optional<User> byUsername = userRepo.findByUsername(username);
-//        String userString = byUsername.map(User::getUsername).orElse("nie ma");
-//        System.out.println(userString);
-//
-//        boolean result = service.checkIfUsernameExist("georg");
-//        assertTrue(result);
-//    }
 }

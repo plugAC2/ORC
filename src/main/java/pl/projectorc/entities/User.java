@@ -23,12 +23,18 @@ public class User implements UserDetails, CredentialsContainer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String username;
+
     private String password;
+
     @Email
     private String email;
+
     private String firstName;
+
     private String secondName;
+
     private String address;
 
     @Singular
@@ -39,6 +45,7 @@ public class User implements UserDetails, CredentialsContainer {
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;
+
     @Column(name = "modified_at")
     private LocalDateTime modifiedAt;
 
@@ -83,10 +90,13 @@ public class User implements UserDetails, CredentialsContainer {
 
     @Builder.Default
     private Boolean accountNonExpired = true;
+
     @Builder.Default
     private Boolean accountNonLocked = true;
+
     @Builder.Default
     private Boolean credentialNonExpired = true;
+
     @Builder.Default
     private Boolean enabled = true;
 
@@ -94,9 +104,6 @@ public class User implements UserDetails, CredentialsContainer {
     public void eraseCredentials() {
         this.password = null;
     }
-
-
-
 
     // to be deleted
 
