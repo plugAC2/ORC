@@ -20,9 +20,9 @@ import java.util.stream.Collectors;
 public class ActorService implements CrudService<Actor, ActorModel> {
 
     @NonNull
-    private ActorRepository actorRepository;
+    private final ActorRepository actorRepository;
     @NonNull
-    private UserSecurityUtil userSecurityUtil;
+    private final UserSecurityUtil userSecurityUtil;
 
     @Override
     public List<Actor> getAll() {
@@ -59,7 +59,6 @@ public class ActorService implements CrudService<Actor, ActorModel> {
         actorModelToChange.setName(actorModel.getName());
         Actor actorToUpdate = setEntityFromModel(actorModelToChange);
         actorToUpdate.setId(id);
-        System.out.println(actorToUpdate.getName());
         newRecordDirect(actorToUpdate);
     }
 

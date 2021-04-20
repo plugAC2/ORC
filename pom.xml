@@ -16,9 +16,10 @@
     <description>Demo project for Spring Boot</description>
     <properties>
         <java.version>16</java.version>
+        <lombok.version>1.18.20</lombok.version>
     </properties>
     <dependencies>
-<!--        thymeleaf-->
+        <!--        thymeleaf-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
@@ -67,7 +68,7 @@
             <artifactId>h2</artifactId>
             <scope>runtime</scope>
         </dependency>
-<!--        security-->
+        <!--        security-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
@@ -81,14 +82,19 @@
             <version>1.10.19</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>5.7.0</version>
+            <scope>test</scope>
+        </dependency>
 
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.20</version>
+            <version>${lombok.version}</version>
             <scope>provided</scope>
         </dependency>
-
 
 
     </dependencies>

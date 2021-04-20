@@ -16,8 +16,8 @@ import java.util.NoSuchElementException;
 @RequestMapping("/character")
 public class ActorController {
 
-    private ActorService actorService;
-    private UserSecurityUtil userSecurityUtil;
+    private final ActorService actorService;
+    private final UserSecurityUtil userSecurityUtil;
 
     public ActorController(ActorService actorService, UserSecurityUtil userSecurityUtil) {
         this.actorService = actorService;
