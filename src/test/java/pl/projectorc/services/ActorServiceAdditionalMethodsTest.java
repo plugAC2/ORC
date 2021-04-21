@@ -1,8 +1,9 @@
 package pl.projectorc.services;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.mockito.Mockito.*;
+
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import pl.projectorc.entities.Actor;
 import pl.projectorc.models.ActorModel;
 import pl.projectorc.repositories.ActorRepository;
@@ -10,9 +11,7 @@ import pl.projectorc.security.UserSecurityUtil;
 
 import java.util.Optional;
 
-import static org.mockito.Mockito.mock;
-
-class ActorServiceTest {
+class ActorServiceAdditionalMethodsTest {
 
     ActorRepository actorRepositoryMock = mock(ActorRepository.class);
     UserSecurityUtil userSecurityUtilMock  = mock(UserSecurityUtil.class);
@@ -60,9 +59,10 @@ class ActorServiceTest {
                 .name("Minsk")
                 .general(false)
                 .build();
+
         Optional<Actor> actorOptional = Optional.ofNullable(actor);
 
-        Mockito.when(actorService.getRecordById(999L)).thenReturn(actorOptional);
+        when(actorService.getRecordById(999L)).thenReturn(actorOptional);
 
         ActorModel actorModel = actorService.setModelFromEntityId(999L);
 
@@ -82,7 +82,7 @@ class ActorServiceTest {
                 .build();
         Optional<Actor> actorOptional = Optional.ofNullable(actor);
 
-        Mockito.when(actorService.getRecordById(999L)).thenReturn(actorOptional);
+       when(actorService.getRecordById(999L)).thenReturn(actorOptional);
 
         boolean generalTest = actorService.checkIfActorGeneral(999L);
 
@@ -101,7 +101,7 @@ class ActorServiceTest {
                 .build();
         Optional<Actor> actorOptional = Optional.ofNullable(actor);
 
-        Mockito.when(actorService.getRecordById(999L)).thenReturn(actorOptional);
+        when(actorService.getRecordById(999L)).thenReturn(actorOptional);
 
         boolean generalTest = actorService.checkIfActorGeneral(999L);
 

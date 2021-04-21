@@ -81,6 +81,7 @@ public class ActorService implements CrudService<Actor, ActorModel> {
     public ActorModel setModelFromEntityId(Long id) {
         Actor actor = getRecordById(id).orElseThrow(NoSuchElementException::new);
         return ActorModel.builder()
+                .id(actor.getId())
                 .name(actor.getName())
                 .build();
     }
