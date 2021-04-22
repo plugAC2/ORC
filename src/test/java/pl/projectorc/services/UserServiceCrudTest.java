@@ -50,15 +50,17 @@ class UserServiceCrudTest {
 
         verify(userRepository).save(userCaptor.capture());
 
-        assertThat(userCaptor.getValue().getId()).isEqualTo(999L);
-        assertThat(userCaptor.getValue().getUsername()).isEqualTo("user");
-        assertThat(userCaptor.getValue().getPassword()).isEqualTo("password");
-        assertThat(userCaptor.getValue().getEmail()).isEqualTo("user@email.web");
-        assertThat(userCaptor.getValue().getFirstName()).isEqualTo("User");
-        assertThat(userCaptor.getValue().getSecondName()).isEqualTo("Resu");
-        assertThat(userCaptor.getValue().getAddress()).isEqualTo("User-Alley, Usergrad, Useria, 4237, Userland");
-        assertThat(userCaptor.getValue().getActors()).hasAtLeastOneElementOfType(Actor.class);
-        assertThat(userCaptor.getValue().getRoles()).hasAtLeastOneElementOfType(Role.class);
+        User capturedValue = userCaptor.getValue();
+
+        assertThat(capturedValue.getId()).isEqualTo(999L);
+        assertThat(capturedValue.getUsername()).isEqualTo("user");
+        assertThat(capturedValue.getPassword()).isEqualTo("password");
+        assertThat(capturedValue.getEmail()).isEqualTo("user@email.web");
+        assertThat(capturedValue.getFirstName()).isEqualTo("User");
+        assertThat(capturedValue.getSecondName()).isEqualTo("Resu");
+        assertThat(capturedValue.getAddress()).isEqualTo("User-Alley, Usergrad, Useria, 4237, Userland");
+        assertThat(capturedValue.getActors()).hasAtLeastOneElementOfType(Actor.class);
+        assertThat(capturedValue.getRoles()).hasAtLeastOneElementOfType(Role.class);
     }
 
     @Test

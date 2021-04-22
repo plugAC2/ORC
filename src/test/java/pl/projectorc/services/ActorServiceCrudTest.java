@@ -46,9 +46,11 @@ class ActorServiceCrudTest {
 
         verify(actorRepository).save(actorCaptor.capture());
 
-        assertThat(actorCaptor.getValue().getId()).isEqualTo(999L);
-        assertThat(actorCaptor.getValue().getName()).isEqualTo("Xzar");
-        assertThat(actorCaptor.getValue().getGeneral()).isFalse();
+        Actor capturedActor = actorCaptor.getValue();
+
+        assertThat(capturedActor.getId()).isEqualTo(999L);
+        assertThat(capturedActor.getName()).isEqualTo("Xzar");
+        assertThat(capturedActor.getGeneral()).isFalse();
     }
 
 
