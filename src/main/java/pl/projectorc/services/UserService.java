@@ -72,7 +72,7 @@ public class UserService implements CrudService<User, UserModel>, UserDetailsSer
 
     @Override
     public User setEntityFromModel(UserModel userModel) {
-        String address = userModel.getStreet() + ", " + userModel.getCity() + ", " + userModel.getRegion() + ", " + userModel.getRegion() + ", " + userModel.getCountry();
+        String address = userModel.getStreet() + ", " + userModel.getCity() + ", " + userModel.getRegion() + ", " + userModel.getZip() + ", " + userModel.getCountry();
         return User.builder()
                 .username(userModel.getUsername())
                 .password(passwordEncoder.encode(userModel.getPassword()))

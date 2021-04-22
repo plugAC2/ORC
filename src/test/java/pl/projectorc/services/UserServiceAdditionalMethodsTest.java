@@ -15,7 +15,7 @@ import java.util.Optional;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.Mockito.mock;
 
-class UserServiceTest {
+class UserServiceAdditionalMethodsTest {
     UserRepository userRepository = mock(UserRepository.class);
     RoleRepository roleRepository = mock(RoleRepository.class);
     PasswordEncoder passwordEncoder = mock(PasswordEncoder.class);
