@@ -66,7 +66,6 @@ public class ActorService implements CrudService<Actor, ActorModel> {
     public void deleteRecordById(Long id) {
         actorRepository.deleteUserActorKey(id);
         actorRepository.deleteById(id);
-
     }
 
     @Override

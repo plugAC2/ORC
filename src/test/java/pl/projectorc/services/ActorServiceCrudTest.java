@@ -8,8 +8,11 @@ import org.mockito.*;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import pl.projectorc.entities.Actor;
+import pl.projectorc.models.ActorModel;
 import pl.projectorc.repositories.ActorRepository;
 import pl.projectorc.security.UserSecurityUtil;
+
+import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.Mockito.*;
@@ -30,9 +33,6 @@ class ActorServiceCrudTest {
     @Captor
     ArgumentCaptor<Actor> actorCaptor;
 
-    @Captor
-    ArgumentCaptor<Actor> actorModelCaptor;
-
     @Test
     void shouldSaveActor() {
 
@@ -51,4 +51,57 @@ class ActorServiceCrudTest {
         assertThat(actorCaptor.getValue().getGeneral()).isFalse();
     }
 
+
+    @Test
+    void shouldChangeActor() {
+
+        Actor actor = Actor.builder()
+                .id(999L)
+                .name("Xzar")
+                .general(false)
+                .build();
+        Optional<Actor> actorOptional = Optional.ofNullable(actor);
+
+        ActorModel actorModelChanges = ActorModel.builder()
+                .id(999L)
+                .name("Xzardas")
+                .build();
+
+
+        when(actorService.getRecordById(999L)).thenReturn(actorOptional);
+
+        actorService.changeRecord(999L, actorModelChanges);
+
+        verify(actorRepository).save(actorCaptor.capture());
+
+        assertThat(actorCaptor.getValue().getName()).isEqualTo("Xzardas");
+    }
+
+    @Test
+    void shouldDeleteById() {
+        Actor actor = Actor.builder()
+                .id(999L)
+                .name("Xzar")
+                .general(false)
+                .build();
+
+        actorService.deleteRecordById(999L);
+
+        verify(actorRepository).deleteById(eq(actor.getId()));
+
+    }
+
+    @Test
+    void shouldDeleteUserActorKeyById() {
+        Actor actor = Actor.builder()
+                .id(999L)
+                .name("Xzar")
+                .general(false)
+                .build();
+
+        actorService.deleteRecordById(999L);
+
+        verify(actorRepository).deleteUserActorKey(eq(actor.getId()));
+
+    }
 }

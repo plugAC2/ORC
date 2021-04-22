@@ -10,9 +10,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     Optional<User> findByUsername(String username);
 
-    @Query("SELECT u.password FROM User u WHERE u.username LIKE ?1")
-    String getUserPassword(String username);
-
     @Query("SELECT u.id FROM User u WHERE u.username LIKE ?1")
     Long getUserId(String username);
 

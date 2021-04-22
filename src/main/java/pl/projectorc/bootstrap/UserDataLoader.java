@@ -55,8 +55,8 @@ public class UserDataLoader implements CommandLineRunner {
         Role adminRole = roleRepository.save(Role.builder().roleName("ADMIN").build());
         Role userRole = roleRepository.save(Role.builder().roleName("USER").build());
 
-        adminRole.setAuthorities(Set.of(createScenario, updateScenario, readScenario, deleteScenario));
-        userRole.setAuthorities(Set.of(createScenario, updateScenario, readScenario, deleteScenario));
+        adminRole.setAuthorities(Set.of(createScenario, updateScenario, readScenario, deleteScenario, createActor, updateActor, readActor, deleteActor));
+        userRole.setAuthorities(Set.of(createScenario, updateScenario, readScenario, deleteScenario, createActor, updateActor, readActor, deleteActor));
 
         roleRepository.saveAll(Arrays.asList(adminRole, userRole));
 
@@ -81,6 +81,7 @@ public class UserDataLoader implements CommandLineRunner {
                 .build());
     }
 
+    //example characters
     private void loadData() {
         actorRepository.save(Actor.builder()
                 .name("Diego")
