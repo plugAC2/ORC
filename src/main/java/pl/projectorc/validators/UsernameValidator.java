@@ -6,7 +6,8 @@ import pl.projectorc.models.UserModel;
 import pl.projectorc.services.UserService;
 
 public class UsernameValidator implements Validator {
-    UserService service;
+
+    private final UserService service;
 
     public UsernameValidator(UserService service) {
         this.service = service;

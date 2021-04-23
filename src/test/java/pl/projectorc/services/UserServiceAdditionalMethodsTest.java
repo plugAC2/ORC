@@ -23,35 +23,6 @@ class UserServiceAdditionalMethodsTest {
     UserEntityModelFactory factory = mock(UserEntityModelFactory.class);
 
     @Test
-    void shouldCreateEntityFromModel() {
-
-        UserService userService = new UserService(userRepository, factory);
-        UserModel userModel = UserModel.builder()
-                .username("user")
-                .password("password")
-                .email("user@email.web")
-                .firstName("User")
-                .secondName("Resu")
-                .street("UserStreet")
-                .city("UserCity")
-                .region("Userland")
-                .country("Useria")
-                .build();
-
-        Mockito.when(passwordEncoder.encode(userModel.getPassword())).thenReturn("encodedPassword");
-        Mockito.when(roleRepository.findByRoleName("USER")).thenReturn(Optional.ofNullable(new Role()));
-
-        User user = factory.createEntityFromModel(userModel);
-
-        assertThat(user.getUsername()).isEqualTo(userModel.getUsername());
-        assertThat(user.getPassword()).isEqualTo("encodedPassword");
-        assertThat(user.getFirstName()).isEqualTo(userModel.getFirstName());
-        assertThat(user.getSecondName()).isEqualTo(userModel.getSecondName());
-        assertThat(user.getAddress()).isEqualTo(userModel.getStreet() + ", " + userModel.getCity() + ", " + userModel.getRegion() + ", " + userModel.getRegion() + ", " + userModel.getCountry());
-        assertThat(user.getRoles()).isNotNull();
-    }
-
-    @Test
     void shouldReturnTrueIfUsernameExists() {
 
         UserService userService = new UserService(userRepository, factory);
