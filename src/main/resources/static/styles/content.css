@@ -55,3 +55,7 @@
     margin: 10px 5vw;
 }
 
+.error {
+    color: darkred;
+    font-weight: bold
+}
