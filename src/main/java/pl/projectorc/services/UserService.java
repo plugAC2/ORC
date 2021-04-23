@@ -6,11 +6,10 @@ import org.hibernate.cfg.NotYetImplementedException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.projectorc.entities.User;
+import pl.projectorc.factories.UserEntityModelFactory;
 import pl.projectorc.models.UserModel;
-import pl.projectorc.repositories.RoleRepository;
 import pl.projectorc.repositories.UserRepository;
 import java.util.*;
 
@@ -20,8 +19,7 @@ import java.util.*;
 public class UserService implements CrudService<User, UserModel>, UserDetailsService {
 
     private final UserRepository userRepository;
-    private final RoleRepository roleRepository;
-    private final PasswordEncoder passwordEncoder;
+    private final UserEntityModelFactory factory;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -47,7 +45,7 @@ public class UserService implements CrudService<User, UserModel>, UserDetailsSer
 
     @Override
     public void newRecord(UserModel userModel) {
-        userRepository.save(setEntityFromModel(userModel));
+        userRepository.save(factory.createEntityFromModel(userModel));
     }
 
     @Override
@@ -62,48 +60,11 @@ public class UserService implements CrudService<User, UserModel>, UserDetailsSer
 
     @Override
     public void changeRecord(Long id, UserModel userModel) {
-
     }
 
     @Override
     public void deleteRecordById(Long id) {
         userRepository.deleteById(id);
-    }
-
-    @Override
-    public User setEntityFromModel(UserModel userModel) {
-        String address = userModel.getStreet() + ", " + userModel.getCity() + ", " + userModel.getRegion() + ", " + userModel.getZip() + ", " + userModel.getCountry();
-        return User.builder()
-                .username(userModel.getUsername())
-                .password(passwordEncoder.encode(userModel.getPassword()))
-                .email(userModel.getEmail())
-                .firstName(userModel.getFirstName())
-                .secondName(userModel.getSecondName())
-                .address(address)
-                .role(roleRepository.findByRoleName("USER").orElseThrow())
-                .build();
-    }
-
-    @Override
-    public UserModel setModelFromEntity(User user) {
-        try {
-            throw new NotYetImplementedException();
-        } catch (NotYetImplementedException e){
-            System.err.println("Method not yet implemented");
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    @Override
-    public UserModel setModelFromEntityId(Long id) {
-        try {
-            throw new NotYetImplementedException();
-        } catch (NotYetImplementedException e){
-            System.err.println("Method not yet implemented");
-            e.printStackTrace();
-        }
-        return null;
     }
 
     public Optional<User> showRecordByUsername(String username) {

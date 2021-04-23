@@ -4,12 +4,10 @@
 
 <div class="model" th:fragment="content">
 
-
-
-
     <form class="model-menu" method="POST" th:object="${addUserModel}">
-        <div><h1>Register</h1></div>
         <!--			dodawanie obiektu/beana-->
+        <div><h1>Register</h1></div>
+
         <div class="newUserBox">
 
             <div class="fieldSection">
@@ -53,14 +51,14 @@
                 <br>
                 <div class="fieldSection">Country
                     <br>
-                <select id="country" name="country" required th:field="*{country}">
-                    <option value="none" selected disabled>Country</option>
-                    <!--						mimo że disabled to wartość jakaś musi być podana-->
-                    <option th:each="country : ${addUserModel.countries}" th:text="${country.value}"
-                            th:value="${country.key}" value="XXX">Country name
-                    </option>
-                    <!--													tutaj nie może być bez userModel, bo korzystamy z metody, nie robimy bindingu-->
-                </select>
+                    <select id="country" name="country" required th:field="*{country}">
+                        <option value="none" selected disabled>Country</option>
+                        <!--						mimo że disabled to wartość jakaś musi być podana-->
+                        <option th:each="country : ${addUserModel.countries}" th:text="${country.value}"
+                                th:value="${country.key}" value="XXX">Country name
+                        </option>
+                        <!--													tutaj nie może być bez userModel, bo korzystamy z metody, nie robimy bindingu-->
+                    </select>
                 </div>
             </div>
             <br>

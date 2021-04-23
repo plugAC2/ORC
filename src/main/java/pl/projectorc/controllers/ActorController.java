@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import pl.projectorc.factories.ActorEntityModelFactory;
 import pl.projectorc.models.ActorModel;
 import pl.projectorc.security.UserSecurityUtil;
 import pl.projectorc.services.ActorService;
@@ -18,10 +19,12 @@ public class ActorController {
 
     private final ActorService actorService;
     private final UserSecurityUtil userSecurityUtil;
+    private final ActorEntityModelFactory factory;
 
-    public ActorController(ActorService actorService, UserSecurityUtil userSecurityUtil) {
+    public ActorController(ActorService actorService, UserSecurityUtil userSecurityUtil, ActorEntityModelFactory factory) {
         this.actorService = actorService;
         this.userSecurityUtil = userSecurityUtil;
+        this.factory = factory;
     }
 
     @GetMapping
@@ -51,7 +54,7 @@ public class ActorController {
             if(!actorService.checkIfActorGeneral(id)) {
                 userSecurityUtil.userOwnsCharacter(id);
             }
-            return new ModelAndView("editActor", "editActorModel", actorService.setModelFromEntityId(id));
+            return new ModelAndView("editActor", "editActorModel", factory.createModelFromEntityId(id));
         } catch (NoSuchElementException e) {
             return new ModelAndView("redirect:/error");
         }

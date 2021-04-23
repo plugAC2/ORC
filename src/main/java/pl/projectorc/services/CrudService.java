@@ -11,8 +11,5 @@ public interface CrudService<T, M> {
     Optional<T> getRecordById(Long id);
     void changeRecord(Long id, M m);
     void deleteRecordById(Long id);
-    T setEntityFromModel(M m);
-    M setModelFromEntity(T t);
-    M setModelFromEntityId(Long id);
 
 }

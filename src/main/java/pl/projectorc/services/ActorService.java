@@ -5,6 +5,7 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.projectorc.entities.Actor;
+import pl.projectorc.factories.ActorEntityModelFactory;
 import pl.projectorc.models.ActorModel;
 import pl.projectorc.repositories.ActorRepository;
 import pl.projectorc.security.UserSecurityUtil;
@@ -22,6 +23,8 @@ public class ActorService implements CrudService<Actor, ActorModel> {
     @NonNull
     private final ActorRepository actorRepository;
     @NonNull
+    private final ActorEntityModelFactory factory;
+    @NonNull
     private final UserSecurityUtil userSecurityUtil;
 
     @Override
@@ -33,13 +36,13 @@ public class ActorService implements CrudService<Actor, ActorModel> {
     public List<ActorModel> getAllModel() {
         List<Actor> actors = actorRepository.getActorByGeneralAndUser(userSecurityUtil.userId());
         return actors.stream()
-                .map(this::setModelFromEntity)
+                .map(factory::createModelFromEntity)
                 .collect(Collectors.toList());
     }
 
     @Override
     public void newRecord(ActorModel actorModel) {
-        Actor savedActor = actorRepository.save(setEntityFromModel(actorModel));
+        Actor savedActor = actorRepository.save(factory.createEntityFromModel(actorModel));
         actorRepository.linkUserActor(userSecurityUtil.userId(), savedActor.getId());
     }
 
@@ -55,9 +58,9 @@ public class ActorService implements CrudService<Actor, ActorModel> {
 
     @Override
     public void changeRecord(Long id, ActorModel actorModel) {
-        ActorModel actorModelToChange = setModelFromEntityId(id);
+        ActorModel actorModelToChange = factory.createModelFromEntityId(id);
         actorModelToChange.setName(actorModel.getName());
-        Actor actorToUpdate = setEntityFromModel(actorModelToChange);
+        Actor actorToUpdate = factory.createEntityFromModel(actorModelToChange);
         actorToUpdate.setId(id);
         newRecordDirect(actorToUpdate);
     }
@@ -66,30 +69,6 @@ public class ActorService implements CrudService<Actor, ActorModel> {
     public void deleteRecordById(Long id) {
         actorRepository.deleteUserActorKey(id);
         actorRepository.deleteById(id);
-    }
-
-    @Override
-    public Actor setEntityFromModel(ActorModel actorModel) {
-        return Actor.builder()
-                .name(actorModel.getName())
-                .general(false)
-                .build();
-    }
-
-    @Override
-    public ActorModel setModelFromEntityId(Long id) {
-        Actor actor = getRecordById(id).orElseThrow(NoSuchElementException::new);
-        return ActorModel.builder()
-                .id(actor.getId())
-                .name(actor.getName())
-                .build();
-    }
-
-    public ActorModel setModelFromEntity(Actor actor) {
-        return ActorModel.builder()
-                .id(actor.getId())
-                .name(actor.getName())
-                .build();
     }
 
     public boolean checkIfActorGeneral(Long id) {

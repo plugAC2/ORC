@@ -6,6 +6,7 @@ import org.mockito.Mockito;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import pl.projectorc.entities.Role;
 import pl.projectorc.entities.User;
+import pl.projectorc.factories.UserEntityModelFactory;
 import pl.projectorc.models.UserModel;
 import pl.projectorc.repositories.RoleRepository;
 import pl.projectorc.repositories.UserRepository;
@@ -19,11 +20,12 @@ class UserServiceAdditionalMethodsTest {
     UserRepository userRepository = mock(UserRepository.class);
     RoleRepository roleRepository = mock(RoleRepository.class);
     PasswordEncoder passwordEncoder = mock(PasswordEncoder.class);
+    UserEntityModelFactory factory = mock(UserEntityModelFactory.class);
 
     @Test
     void shouldCreateEntityFromModel() {
 
-        UserService userService = new UserService(userRepository, roleRepository, passwordEncoder);
+        UserService userService = new UserService(userRepository, factory);
         UserModel userModel = UserModel.builder()
                 .username("user")
                 .password("password")
@@ -39,7 +41,7 @@ class UserServiceAdditionalMethodsTest {
         Mockito.when(passwordEncoder.encode(userModel.getPassword())).thenReturn("encodedPassword");
         Mockito.when(roleRepository.findByRoleName("USER")).thenReturn(Optional.ofNullable(new Role()));
 
-        User user = userService.setEntityFromModel(userModel);
+        User user = factory.createEntityFromModel(userModel);
 
         assertThat(user.getUsername()).isEqualTo(userModel.getUsername());
         assertThat(user.getPassword()).isEqualTo("encodedPassword");
@@ -52,7 +54,7 @@ class UserServiceAdditionalMethodsTest {
     @Test
     void shouldReturnTrueIfUsernameExists() {
 
-        UserService userService = new UserService(userRepository, roleRepository, passwordEncoder);
+        UserService userService = new UserService(userRepository, factory);
 
         User user = new User();
         user.setUsername("user");
@@ -67,7 +69,7 @@ class UserServiceAdditionalMethodsTest {
     @Test
     void shouldReturnFalseIfUsernameNotExists() {
 
-        UserService userService = new UserService(userRepository, roleRepository, passwordEncoder);
+        UserService userService = new UserService(userRepository, factory);
 
         User user = new User();
         user.setUsername("user");

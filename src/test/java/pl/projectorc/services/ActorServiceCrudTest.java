@@ -104,6 +104,5 @@ class ActorServiceCrudTest {
         actorService.deleteRecordById(999L);
 
         verify(actorRepository).deleteUserActorKey(eq(actor.getId()));
-
     }
 }
