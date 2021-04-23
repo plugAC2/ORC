@@ -27,7 +27,7 @@
 }
 
 .log-in-out-list {
-
+    font-size: x-large;
 }
 
 .log-in-out-item {
@@ -39,4 +39,6 @@
     color: darkred;
     background-color: transparent;
     cursor: pointer;
+    font-size: x-large;
+    font-weight: bold;
 }

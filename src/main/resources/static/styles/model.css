@@ -17,6 +17,7 @@ a:hover, a:active {
     left: 12em;
     display: flex;
     color: darkred;
+    z-index: 3;
 }
 
 .model-menu {

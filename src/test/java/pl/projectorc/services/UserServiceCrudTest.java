@@ -34,6 +34,7 @@ class UserServiceCrudTest {
 
     @Test
     void shouldSaveUser() {
+//        given
         User user = User.builder()
                 .id(999L)
                 .username("user")
@@ -47,7 +48,7 @@ class UserServiceCrudTest {
                 .build();
 
         userService.newRecordDirect(user);
-
+//        then
         verify(userRepository).save(userCaptor.capture());
 
         User capturedValue = userCaptor.getValue();
@@ -65,6 +66,7 @@ class UserServiceCrudTest {
 
     @Test
     void shouldDeleteById() {
+//        given
         User user = User.builder()
                 .id(999L)
                 .username("user")
@@ -76,9 +78,9 @@ class UserServiceCrudTest {
                 .actor(new Actor(1L, "Xzar", false))
                 .role(new Role())
                 .build();
-        
+//        when
         userService.deleteRecordById(999L);
-        
+//        then
         verify(userRepository).deleteById(eq(user.getId()));
     }
 }

@@ -30,36 +30,36 @@ public class ActorEntityModelFactoryTest {
 
     @Test
     void shouldCreateEntityFromModel() {
-
+//        given
         ActorModel actorModel = ActorModel.builder()
                 .id(999L)
                 .name("Ingvar")
                 .build();
-
+//        when
         Actor actor = factory.createEntityFromModel(actorModel);
-
+//        then
         assertThat(actorModel.getName()).isEqualTo(actor.getName());
         assertThat(actor.getGeneral()).isFalse();
     }
 
     @Test
     void shouldCreateModelFromEntity() {
-
+//        given
         Actor actor = Actor.builder()
                 .id(999L)
                 .name("Xzar")
                 .general(false)
                 .build();
-
+//        when
         ActorModel actorModel = factory.createModelFromEntity(actor);
-
+//        then
         assertThat(actorModel.getId()).isEqualTo(actor.getId());
         assertThat(actorModel.getName()).isEqualTo(actor.getName());
     }
 
     @Test
     void shouldCreateModelFromEntityId() {
-
+//        given
         ActorService actorService = new ActorService(actorRepositoryMock, factory, userSecurityUtilMock);
 
         Actor actor = Actor.builder()
@@ -71,9 +71,9 @@ public class ActorEntityModelFactoryTest {
         Optional<Actor> actorOptional = Optional.ofNullable(actor);
 
         when(actorService.getRecordById(999L)).thenReturn(actorOptional);
-
+//        when
         ActorModel actorModel = factory.createModelFromEntityId(999L);
-
+//        then
         assertThat(actorModel.getId()).isEqualTo(actor.getId());
         assertThat(actorModel.getName()).isEqualTo(actor.getName());
     }

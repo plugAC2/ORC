@@ -22,7 +22,7 @@ class ActorServiceAdditionalMethodsTest {
 
     @Test
     void shouldReturnGeneralTrue() {
-
+//        given
         ActorService actorService = new ActorService(actorRepositoryMock, factory, userSecurityUtilMock);
 
         Actor actor = Actor.builder()
@@ -33,15 +33,15 @@ class ActorServiceAdditionalMethodsTest {
         Optional<Actor> actorOptional = Optional.ofNullable(actor);
 
        when(actorService.getRecordById(999L)).thenReturn(actorOptional);
-
+//        when
         boolean generalTest = actorService.checkIfActorGeneral(999L);
-
+//        then
         assertThat(generalTest).isTrue();
     }
 
     @Test
     void shouldReturnGeneralFalse() {
-
+//        given
         ActorService actorService = new ActorService(actorRepositoryMock, factory, userSecurityUtilMock);
 
         Actor actor = Actor.builder()
@@ -52,9 +52,9 @@ class ActorServiceAdditionalMethodsTest {
         Optional<Actor> actorOptional = Optional.ofNullable(actor);
 
         when(actorService.getRecordById(999L)).thenReturn(actorOptional);
-
+//        when
         boolean generalTest = actorService.checkIfActorGeneral(999L);
-
+//        then
         assertThat(generalTest).isFalse();
     }
 }

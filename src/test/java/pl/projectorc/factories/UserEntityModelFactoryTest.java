@@ -33,7 +33,7 @@ public class UserEntityModelFactoryTest {
 
     @Test
     void shouldCreateEntityFromModel() {
-
+//        given
         UserModel userModel = UserModel.builder()
                 .username("user")
                 .password("password")
@@ -49,9 +49,9 @@ public class UserEntityModelFactoryTest {
 
         Mockito.when(passwordEncoder.encode(userModel.getPassword())).thenReturn("encodedPassword");
         Mockito.when(roleRepository.findByRoleName("USER")).thenReturn(Optional.ofNullable(new Role()));
-
+//        when
         User user = factory.createEntityFromModel(userModel);
-
+//        then
         assertThat(user.getUsername()).isEqualTo(userModel.getUsername());
         assertThat(user.getPassword()).isEqualTo("encodedPassword");
         assertThat(user.getFirstName()).isEqualTo(userModel.getFirstName());

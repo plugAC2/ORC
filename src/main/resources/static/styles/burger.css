@@ -14,11 +14,11 @@ body{
 }
 
 .hamburger-box {
-
     width: 40px;
     height: 40px;
     display: inline-block;
     position: relative;
+    z-index: 4;
 }
 
 .hamburger-inner {
@@ -30,6 +30,7 @@ body{
     top: 50%;
     transform: translateY(-50%);
     transition: background-color .500ms .1500ms ease-in-out;
+
 }
 
 .hamburger-inner::before {

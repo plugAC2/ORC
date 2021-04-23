@@ -24,22 +24,22 @@ class UserServiceAdditionalMethodsTest {
 
     @Test
     void shouldReturnTrueIfUsernameExists() {
-
+//        given
         UserService userService = new UserService(userRepository, factory);
 
         User user = new User();
         user.setUsername("user");
 
         Mockito.when(userRepository.findByUsername("user")).thenReturn(Optional.ofNullable(user));
-
+//        when
         boolean userExistence = userService.checkIfUsernameExist("user");
-
+//        then
         assertThat(userExistence).isTrue();
     }
 
     @Test
     void shouldReturnFalseIfUsernameNotExists() {
-
+//        given
         UserService userService = new UserService(userRepository, factory);
 
         User user = new User();
@@ -48,9 +48,9 @@ class UserServiceAdditionalMethodsTest {
         User userTwo = null;
 
         Mockito.when(userRepository.findByUsername("userTwo")).thenReturn(Optional.ofNullable(userTwo));
-
+//        when
         boolean userExistence = userService.checkIfUsernameExist("user");
-
+//        then
         assertThat(userExistence).isFalse();
     }
 }

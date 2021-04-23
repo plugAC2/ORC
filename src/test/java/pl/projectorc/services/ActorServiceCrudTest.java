@@ -35,7 +35,7 @@ class ActorServiceCrudTest {
 
     @Test
     void shouldSaveActor() {
-
+//        given
         Actor actor = Actor.builder()
                 .id(999L)
                 .name("Xzar")
@@ -45,9 +45,9 @@ class ActorServiceCrudTest {
         actorService.newRecordDirect(actor);
 
         verify(actorRepository).save(actorCaptor.capture());
-
+//        when
         Actor capturedActor = actorCaptor.getValue();
-
+//        then
         assertThat(capturedActor.getId()).isEqualTo(999L);
         assertThat(capturedActor.getName()).isEqualTo("Xzar");
         assertThat(capturedActor.getGeneral()).isFalse();
@@ -56,7 +56,7 @@ class ActorServiceCrudTest {
 
     @Test
     void shouldChangeActor() {
-
+//        given
         Actor actor = Actor.builder()
                 .id(999L)
                 .name("Xzar")
@@ -71,9 +71,9 @@ class ActorServiceCrudTest {
 
 
         when(actorService.getRecordById(999L)).thenReturn(actorOptional);
-
+//        when
         actorService.changeRecord(999L, actorModelChanges);
-
+//        then
         verify(actorRepository).save(actorCaptor.capture());
 
         assertThat(actorCaptor.getValue().getName()).isEqualTo("Xzardas");
@@ -81,28 +81,30 @@ class ActorServiceCrudTest {
 
     @Test
     void shouldDeleteById() {
+//        given
         Actor actor = Actor.builder()
                 .id(999L)
                 .name("Xzar")
                 .general(false)
                 .build();
-
+//        when
         actorService.deleteRecordById(999L);
-
+//        then
         verify(actorRepository).deleteById(eq(actor.getId()));
 
     }
 
     @Test
     void shouldDeleteUserActorKeyById() {
+//        given
         Actor actor = Actor.builder()
                 .id(999L)
                 .name("Xzar")
                 .general(false)
                 .build();
-
+//        when
         actorService.deleteRecordById(999L);
-
+//        then
         verify(actorRepository).deleteUserActorKey(eq(actor.getId()));
     }
 }
