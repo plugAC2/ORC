@@ -4,10 +4,8 @@ package pl.projectorc.services;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import pl.projectorc.entities.Role;
 import pl.projectorc.entities.User;
 import pl.projectorc.factories.UserEntityModelFactory;
-import pl.projectorc.models.UserModel;
 import pl.projectorc.repositories.RoleRepository;
 import pl.projectorc.repositories.UserRepository;
 

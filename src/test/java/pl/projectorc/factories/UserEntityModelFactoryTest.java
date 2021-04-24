@@ -12,7 +12,6 @@ import pl.projectorc.entities.User;
 import pl.projectorc.models.UserModel;
 import pl.projectorc.repositories.RoleRepository;
 import pl.projectorc.repositories.UserRepository;
-import pl.projectorc.services.UserService;
 
 import java.util.Optional;
 

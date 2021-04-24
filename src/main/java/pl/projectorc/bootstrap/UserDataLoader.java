@@ -1,6 +1,5 @@
 package pl.projectorc.bootstrap;
 
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -16,7 +15,6 @@ import pl.projectorc.repositories.UserRepository;
 
 import java.util.Arrays;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Component
